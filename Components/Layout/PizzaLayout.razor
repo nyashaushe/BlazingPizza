@@ -2,55 +2,57 @@
 
 <div class="page">
     <header class="pizza-header">
-        <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <div class="container-fluid">
-                    <a class="navbar-brand" href="/">
-                        <img src="/img/logo.svg" alt="Blazing Pizza" style="height: 40px;" />
-                        Blazing Pizza
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ms-auto">
-                            <li class="nav-item">
-                                <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">
-                                    Home
-                                </NavLink>
-                            </li>
-                            <li class="nav-item">
-                                <NavLink class="nav-link" href="/orders">
-                                    My Orders
-                                </NavLink>
-                            </li>
-                            <li class="nav-item">
-                                <NavLink class="nav-link" href="/about">
-                                    About
-                                </NavLink>
-                            </li>
-                        </ul>
-                    </div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3">
+            <div class="container-fluid px-4">
+                <a class="navbar-brand d-flex align-items-center" href="/">
+                    <img src="/img/logo.svg" alt="Blazing Pizza" style="height: 50px; margin-right: 15px;" />
+                    <span style="font-size: 1.8rem; font-weight: bold;">Blazing Pizza</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <NavLink class="nav-link px-3" href="/" Match="NavLinkMatch.All" style="font-size: 1.1rem;">
+                                Home
+                            </NavLink>
+                        </li>
+                        <li class="nav-item">
+                            <NavLink class="nav-link px-3" href="/orders" style="font-size: 1.1rem;">
+                                My Orders
+                            </NavLink>
+                        </li>
+                        <li class="nav-item">
+                            <NavLink class="nav-link px-3" href="/about" style="font-size: 1.1rem;">
+                                About
+                            </NavLink>
+                        </li>
+                    </ul>
                 </div>
-            </nav>
-        </div>
+            </div>
+        </nav>
     </header>
 
     <main class="pizza-main">
         @Body
     </main>
 
-    <footer class="pizza-footer bg-dark text-light py-4 mt-5">
+    <footer class="pizza-footer bg-dark text-light">
         <div class="container">
-            <div class="row">
+            <div class="row align-items-center">
                 <div class="col-md-6">
-                    <h5>Blazing Pizza</h5>
-                    <p>The hottest pizza delivery in the United States!</p>
+                    <h4 style="color: #e74c3c; margin-bottom: 15px;">🍕 Blazing Pizza</h4>
+                    <p style="font-size: 1.1rem; margin-bottom: 10px;">The hottest pizza delivery in the United States!
+                    </p>
                 </div>
                 <div class="col-md-6 text-end">
-                    <p class="mb-1">Created by: <strong>Nyasha Ushewokunze</strong></p>
-                    <p class="mb-0">Location: <strong>Zimbabwe</strong></p>
-                    <small class="text-muted">© 2024 Blazing Pizza. All rights reserved.</small>
+                    <p class="mb-2" style="font-size: 1.1rem;">Created by: <strong style="color: #ffc107;">Nyasha
+                            Ushewokunze</strong></p>
+                    <p class="mb-2" style="font-size: 1.1rem;">Location: <strong
+                            style="color: #ffc107;">Zimbabwe</strong></p>
+                    <small class="text-muted" style="font-size: 0.9rem;">© 2024 Blazing Pizza. All rights
+                        reserved.</small>
                 </div>
             </div>
         </div>
@@ -64,21 +66,248 @@
 </div>
 
 <style>
-    .pizza-header {
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    * {
+        box-sizing: border-box;
     }
-    
-    .pizza-main {
-        min-height: calc(100vh - 200px);
+
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-    
-    .pizza-footer {
-        margin-top: auto;
-    }
-    
+
     .page {
         display: flex;
         flex-direction: column;
         min-height: 100vh;
+        width: 100%;
+    }
+
+    .pizza-header {
+        flex-shrink: 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+    }
+
+    .pizza-main {
+        flex: 1 0 auto;
+        padding: 30px 20px 60px 20px;
+        background-color: #f8f9fa;
+        width: 100%;
+        min-height: calc(100vh - 250px);
+    }
+
+    .pizza-footer {
+        flex-shrink: 0;
+        margin-top: auto;
+        background-color: #343a40 !important;
+        color: white;
+        padding: 50px 0;
+        border-top: 5px solid #e74c3c;
+        box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .main {
+        display: flex;
+        flex-direction: row;
+        gap: 30px;
+        max-width: 1600px;
+        margin: 0 auto;
+        padding: 0 20px;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    /* Mobile responsive */
+    .main.mobile {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .pizza-content {
+        flex: 2;
+        width: 100%;
+        min-width: 0;
+    }
+
+    .pizza-content h1 {
+        color: #e74c3c;
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .pizza-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .pizza-cards li {
+        background-size: cover;
+        background-position: center;
+        height: 220px;
+        border-radius: 12px;
+        position: relative;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+    }
+
+    .pizza-cards li:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+    }
+
+    .pizza-cards li::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, rgba(0, 0, 0, 0.3), transparent 50%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .pizza-cards li:hover::before {
+        opacity: 1;
+    }
+
+    .pizza-info {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+        color: white;
+        padding: 20px;
+        border-radius: 0 0 8px 8px;
+    }
+
+    .pizza-info .title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .pizza-info .price {
+        font-size: 1.1rem;
+        font-weight: bold;
+        background: #27ae60;
+        padding: 5px 10px;
+        border-radius: 4px;
+        float: right;
+        margin-top: 10px;
+    }
+
+    .sidebar {
+        flex: 0 0 400px;
+        min-width: 350px;
+        max-width: 400px;
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        height: fit-content;
+        position: sticky;
+        top: 30px;
+        border: 1px solid #e9ecef;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Mobile sidebar */
+    .sidebar.mobile {
+        flex: none;
+        position: static;
+    }
+
+    .order-contents h2 {
+        color: #343a40;
+        margin-bottom: 1rem;
+    }
+
+    .cart-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    .cart-item .title {
+        font-weight: 500;
+    }
+
+    .cart-item .item-price {
+        color: #27ae60;
+        font-weight: bold;
+    }
+
+    .cart-item .delete-item {
+        color: #dc3545;
+        cursor: pointer;
+        font-weight: bold;
+        padding: 5px;
+    }
+
+    .empty-cart {
+        text-align: center;
+        color: #6c757d;
+        padding: 2rem;
+        font-style: italic;
+    }
+
+    .order-total {
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 2px solid #dee2e6;
+        text-align: center;
+    }
+
+    .total-price {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #27ae60;
+        display: block;
+        margin: 10px 0;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+
+    .btn-warning {
+        background-color: #ffc107;
+        color: #212529;
+    }
+
+    .btn-warning:hover {
+        background-color: #e0a800;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(255, 193, 7, 0.3);
+    }
+
+    .btn.disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none !important;
+        box-shadow: none !important;
     }
 </style>
