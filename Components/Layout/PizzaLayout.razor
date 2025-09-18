@@ -1,0 +1,84 @@
+@inherits LayoutComponentBase
+
+<div class="page">
+    <header class="pizza-header">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/">
+                        <img src="/img/logo.svg" alt="Blazing Pizza" style="height: 40px;" />
+                        Blazing Pizza
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">
+                                    Home
+                                </NavLink>
+                            </li>
+                            <li class="nav-item">
+                                <NavLink class="nav-link" href="/orders">
+                                    My Orders
+                                </NavLink>
+                            </li>
+                            <li class="nav-item">
+                                <NavLink class="nav-link" href="/about">
+                                    About
+                                </NavLink>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="pizza-main">
+        @Body
+    </main>
+
+    <footer class="pizza-footer bg-dark text-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Blazing Pizza</h5>
+                    <p>The hottest pizza delivery in the United States!</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p class="mb-1">Created by: <strong>Nyasha Ushewokunze</strong></p>
+                    <p class="mb-0">Location: <strong>Zimbabwe</strong></p>
+                    <small class="text-muted">© 2024 Blazing Pizza. All rights reserved.</small>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<div id="blazor-error-ui" data-nosnippet>
+    An unhandled error has occurred.
+    <a href="." class="reload">Reload</a>
+    <span class="dismiss">🗙</span>
+</div>
+
+<style>
+    .pizza-header {
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .pizza-main {
+        min-height: calc(100vh - 200px);
+    }
+    
+    .pizza-footer {
+        margin-top: auto;
+    }
+    
+    .page {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+</style>

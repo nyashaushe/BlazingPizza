@@ -1,0 +1,203 @@
+@page "/checkout"
+@page "/checkout/{step}"
+@layout Components.Layout.PizzaLayout
+@using BlazingPizza.Services
+@inject OrderState OrderState
+@inject NavigationManager NavigationManager
+
+<PageTitle>Checkout - Blazing Pizza</PageTitle>
+
+<div class="container mt-4">
+    <h1 class="display-4 text-center mb-4">Checkout</h1>
+    
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <!-- Progress indicator -->
+            <div class="progress mb-4" style="height: 3px;">
+                <div class="progress-bar bg-success" role="progressbar" 
+                     style="width: @GetProgressPercentage()%" 
+                     aria-valuenow="@GetProgressPercentage()" 
+                     aria-valuemin="0" 
+                     aria-valuemax="100"></div>
+            </div>
+            
+            <div class="row mb-4">
+                <div class="col text-center">
+                    <span class="badge @(GetStepClass("cart")) p-2">1. Cart</span>
+                </div>
+                <div class="col text-center">
+                    <span class="badge @(GetStepClass("address")) p-2">2. Address</span>
+                </div>
+                <div class="col text-center">
+                    <span class="badge @(GetStepClass("payment")) p-2">3. Payment</span>
+                </div>
+                <div class="col text-center">
+                    <span class="badge @(GetStepClass("confirmation")) p-2">4. Confirm</span>
+                </div>
+            </div>
+            
+            @if (Step == "cart" || string.IsNullOrEmpty(Step))
+            {
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        <h3>Review Your Order</h3>
+                    </div>
+                    <div class="card-body">
+                        @if (OrderState.Order.Pizzas.Any())
+                        {
+                            @foreach (var pizza in OrderState.Order.Pizzas)
+                            {
+                                <div class="d-flex justify-content-between align-items-center border-bottom py-2">
+                                    <div>
+                                        <strong>@pizza.Size" @pizza.Special.Name</strong>
+                                    </div>
+                                    <div>
+                                        <span class="text-success fw-bold">@pizza.GetFormattedTotalPrice()</span>
+                                    </div>
+                                </div>
+                            }
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <strong>Total:</strong>
+                                <strong class="text-success fs-4">@OrderState.Order.GetFormattedTotalPrice()</strong>
+                            </div>
+                            <div class="mt-3">
+                                <a href="/checkout/address" class="btn btn-primary">Continue to Address →</a>
+                                <a href="/" class="btn btn-outline-secondary ms-2">← Back to Menu</a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="text-center py-4">
+                                <p>Your cart is empty!</p>
+                                <a href="/" class="btn btn-primary">Start Ordering</a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+            else if (Step == "address")
+            {
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        <h3>Delivery Address</h3>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="mb-3">
+                                <label class="form-label">Street Address</label>
+                                <input type="text" class="form-control" placeholder="123 Main St" />
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">City</label>
+                                    <input type="text" class="form-control" placeholder="Anytown" />
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-label">State</label>
+                                    <select class="form-control">
+                                        <option>Select State</option>
+                                        <option>CA</option>
+                                        <option>NY</option>
+                                        <option>TX</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-label">ZIP</label>
+                                    <input type="text" class="form-control" placeholder="12345" />
+                                </div>
+                            </div>
+                        </form>
+                        <div class="mt-3">
+                            <a href="/checkout/payment" class="btn btn-primary">Continue to Payment →</a>
+                            <a href="/checkout/cart" class="btn btn-outline-secondary ms-2">← Back to Cart</a>
+                        </div>
+                    </div>
+                </div>
+            }
+            else if (Step == "payment")
+            {
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        <h3>Payment Information</h3>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="mb-3">
+                                <label class="form-label">Card Number</label>
+                                <input type="text" class="form-control" placeholder="1234 5678 9012 3456" />
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Expiry Date</label>
+                                    <input type="text" class="form-control" placeholder="MM/YY" />
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">CVV</label>
+                                    <input type="text" class="form-control" placeholder="123" />
+                                </div>
+                            </div>
+                        </form>
+                        <div class="mt-3">
+                            <a href="/checkout/confirmation" class="btn btn-primary">Review Order →</a>
+                            <a href="/checkout/address" class="btn btn-outline-secondary ms-2">← Back to Address</a>
+                        </div>
+                    </div>
+                </div>
+            }
+            else if (Step == "confirmation")
+            {
+                <div class="card shadow-sm">
+                    <div class="card-header">
+                        <h3>Order Confirmation</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-success">
+                            <h4>Order Placed Successfully! 🎉</h4>
+                            <p>Your delicious pizzas are being prepared and will be delivered soon.</p>
+                        </div>
+                        <div class="mt-3">
+                            <a href="/orders" class="btn btn-primary">View My Orders</a>
+                            <a href="/" class="btn btn-outline-primary ms-2">Order More Pizza</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter] public string? Step { get; set; }
+    
+    private string GetProgressPercentage()
+    {
+        return Step switch
+        {
+            "cart" or null => "25",
+            "address" => "50",
+            "payment" => "75",
+            "confirmation" => "100",
+            _ => "25"
+        };
+    }
+    
+    private string GetStepClass(string step)
+    {
+        var currentStep = Step ?? "cart";
+        var isActive = step == currentStep;
+        var isCompleted = step switch
+        {
+            "cart" => currentStep is "address" or "payment" or "confirmation",
+            "address" => currentStep is "payment" or "confirmation",
+            "payment" => currentStep is "confirmation",
+            _ => false
+        };
+        
+        return (isActive, isCompleted) switch
+        {
+            (true, _) => "bg-primary text-white",
+            (false, true) => "bg-success text-white",
+            _ => "bg-light text-dark"
+        };
+    }
+}
